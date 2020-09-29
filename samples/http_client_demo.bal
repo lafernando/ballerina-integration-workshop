@@ -16,10 +16,10 @@ public function main() returns @tainted error? {
         io:println(result.formatted_address);
     });
     results = results.filter(function (json result) returns boolean {
-        return result.formatted_address.toString().indexOf("Royal") is int;
+        return result.formatted_address.toString().indexOf("College") is int;
     });
     results.forEach(function (json result) {
-        io:println("** RC Result: ", result.formatted_address);
+        io:println("** School: ", result.formatted_address);
     });
 
     //https://postman-echo.com/post
