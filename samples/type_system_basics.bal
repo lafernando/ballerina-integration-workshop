@@ -14,8 +14,8 @@ type Student record {
     string college;
 };
 
-type AuthorEntry record {
-    string author;
+type Author record {
+    string name;
     string[] books;
 };
 
@@ -50,11 +50,11 @@ public function main() returns error? {
 
     io:println("Age: ", calculateAge(io:readln("Enter birth year: ")));
 
-    json msg = { author: "J.K. Rowling", books: ["Harry Potter", "Fantastic Beasts"] };
-    io:println("Author: ", msg.author);
+    json msg = { name: "J.K. Rowling", books: ["Harry Potter", "Fantastic Beasts"] };
+    io:println("Name: ", msg.name);
     io:println("Books: ", msg.books);
 
-    AuthorEntry entry = check msg.cloneWithType(AuthorEntry);
+    Author entry = check msg.cloneWithType(Author);
     io:println("Entry: ", entry);
 }
 
