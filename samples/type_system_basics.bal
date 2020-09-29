@@ -2,14 +2,14 @@ import ballerina/io;
 import ballerina/lang.'int as intlib;
 import ballerina/time;
 
-// closed record
-type Person record {|
+type Person record {
     string name;
     int birthyear;
-|};
+};
 
-// open record
 type Student record {
+    //string name;
+    //int birthyear;
     *Person;
     string college;
 };
@@ -28,10 +28,12 @@ public function main() returns error? {
     boolean b = true;
 
     Student s1 = { name: "Jack", birthyear: 1995, college: "Stanford" };
-    // only open records can do this
-    s1["graduated"] = "2020-10-10";
-
     io:println("Student: ", s1);
+
+    // due to the structural type system, s1 can be assigned to p1,
+    // since the s1's structure is compatible with p1's,
+    // where we can say, a "Student" is a "Person" as well. 
+    Person p1 = s1;
 
     string|byte[] input = "XXX";
 
