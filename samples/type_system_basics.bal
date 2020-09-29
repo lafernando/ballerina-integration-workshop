@@ -1,5 +1,5 @@
 import ballerina/io;
-import ballerina/lang.'int;
+import ballerina/lang.'int as intlib;
 import ballerina/time;
 
 // closed record
@@ -14,9 +14,14 @@ type Student record {
     string college;
 };
 
+type AuthorEntry record {
+    string author;
+    string[] books;
+};
+
 // more in-depth info on the type system: https://hackernoon.com/rethinking-programming-network-aware-type-system-8o7x3yh6
 
-public function main() {
+public function main() returns error? {
     int i = 10;
     decimal d = 10.25;
     float f = 1.25;
@@ -36,7 +41,7 @@ public function main() {
         int inputLength = input.length();
     }
 
-    int|error result = 'int:fromString("100x");
+    int|error result = intlib:fromString("100x");
     if result is int {
         io:println("Number: ", result + 10);
     } else {
@@ -44,6 +49,13 @@ public function main() {
     }
 
     io:println("Age: ", calculateAge(io:readln("Enter birth year: ")));
+
+    json msg = { author: "J.K. Rowling", books: ["Harry Potter", "Fantastic Beasts"] };
+    io:println("Author: ", msg.author);
+    io:println("Books: ", msg.books);
+
+    AuthorEntry entry = check msg.cloneWithType(AuthorEntry);
+    io:println("Entry: ", entry);
 }
 
 // public function calculateAge(string birthYearInput) returns int|error {
@@ -56,6 +68,6 @@ public function main() {
 // }
 
 public function calculateAge(string birthYearInput) returns int|error {
-    int result = check 'int:fromString(birthYearInput);
+    int result = check intlib:fromString(birthYearInput);
     return time:getYear(time:currentTime()) - result; 
 }
