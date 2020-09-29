@@ -14,4 +14,10 @@ public function main() returns @tainted error? {
     results.forEach(function (json result) {
         io:println(result.formatted_address);
     });
+    results = results.filter(function (json result) returns boolean {
+        return result.formatted_address.toString().indexOf("Royal") is int;
+    });
+    results.forEach(function (json result) {
+        io:println("** RC Result: ", result.formatted_address);
+    });
 }
