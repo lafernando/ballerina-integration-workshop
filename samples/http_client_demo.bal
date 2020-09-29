@@ -20,4 +20,9 @@ public function main() returns @tainted error? {
     results.forEach(function (json result) {
         io:println("** RC Result: ", result.formatted_address);
     });
+
+    //https://postman-echo.com/post
+    httpClient = new("https://postman-echo.com");
+    resp = check httpClient->post("/post", "ABCD");
+    io:println("** Echoed: ", resp.getJsonPayload());
 }
