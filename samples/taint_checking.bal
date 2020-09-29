@@ -7,13 +7,13 @@ public function main(string... args) {
     string s2 = <@tainted> s1;
     string s2x = s2 + "abc";
     //mySecureFunction(s2x);
-    //mySecureFunction(getNetworkData());
+    //mySecureFunction(getUnverifiedData());
 }
 
 public function mySecureFunction(@untainted string input) {
     io:println(input);
 }
 
-public function getNetworkData() returns @tainted string {
+public function getUnverifiedData() returns @tainted string {
     return <@tainted> "XXX";
 }
