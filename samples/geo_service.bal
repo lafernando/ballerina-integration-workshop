@@ -4,6 +4,7 @@ type Entry record {|
     float lat;
     float long;
     string src = "UNKNOWN";
+    string address;
     string? ref;
 |};
 
@@ -21,7 +22,7 @@ service geoService on new http:Listener(8081) {
     resource function lookup(http:Caller caller, http:Request request, float lat, float long) returns error? {
         Entry? entry = entries[{lat,long}.toString()];
         if entry is Entry {
-            check caller->ok({location: {lat: entry.lat, lng: entry.long}});
+            check caller->ok(entry.address);
         } else {
             check caller->notFound();
         }
