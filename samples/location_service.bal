@@ -1,5 +1,6 @@
 import ballerina/http;
 import ballerina/system;
+import ballerina/io;
 
 @http:ServiceConfig {
     basePath: "/"
@@ -22,6 +23,7 @@ service locationService on new http:Listener(8080) {
         json[] addrs = from var item in <json[]> check locationInfo.results 
                  where item.geometry.location_type == "GEOMETRIC_CENTER"
                  select check item.formatted_address;
+        io:println(jr);
         check caller->respond(<@untainted> {location: {lat, long}, address: addrs[0]});
     }
 
