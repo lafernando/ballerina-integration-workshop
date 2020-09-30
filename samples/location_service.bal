@@ -1,6 +1,5 @@
 import ballerina/http;
 import ballerina/system;
-import ballerina/io;
 
 @http:ServiceConfig {
     basePath: "/"
