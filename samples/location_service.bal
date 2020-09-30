@@ -19,8 +19,10 @@ service locationService on new http:Listener(8080) {
         float long = <float> jr.location.lng;
         resp = check gcClient->get(<@untainted> string `/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`);
         json locationInfo = <@untainted> check resp.getJsonPayload();
-        json[] results = <json[]> locationInfo.results;
-        check caller->respond(check results[0].formatted_address);
+        json x = from var item in <json[]> check locationInfo.results 
+                 where item.geometry.location_type == "GEOMETRIC_CENTER"
+                 select check item.formatted_address;
+        check caller->respond(x);
     }
 
 }
