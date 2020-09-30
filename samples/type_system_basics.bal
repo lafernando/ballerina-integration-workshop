@@ -19,7 +19,7 @@ type Author record {
     string[] books;
 };
 
-// more in-depth info on the type system: https://hackernoon.com/rethinking-programming-network-aware-type-system-8o7x3yh6
+// more in-depth info on the structural type system: https://ballerina.io/why-ballerina/network-aware-type-system/
 
 public function main() returns error? {
     int i = 10;

@@ -6,8 +6,10 @@ public function main() returns @tainted error? {
     // https://maps.googleapis.com/maps/api/geocode/json?latlng=6.9048539,79.8589821&key=YOUR_API_KEY
     // https://developers.google.com/maps/documentation/geocoding/get-api-key    
     http:Client httpClient = new("https://maps.googleapis.com");
-    float lat = 6.9048539;
-    float long = 79.8589821;
+    // float lat = 6.9048539;
+    // float long = 79.8589821;
+    float lat = 6.9174;
+    float long = 79.8896;
     string apiKey = system:getEnv("GC_KEY");
     var resp = check httpClient->get(string `/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`);
     json jp = check resp.getJsonPayload();
