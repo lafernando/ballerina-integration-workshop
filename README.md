@@ -28,9 +28,9 @@ Visual Studio Code is recommended as the editor for Ballerina projects. Install 
   - Writing an integration scenario for calling external services using the HTTP client and accepting JSON data
   - Working with JSON data
   - Service data binding, usage of open records
-  - Query expressions for filtering and aggregating results
+  - Language integrated query for filtering data
   - Error handling when communicating with external services
-  - Intro to gRPC
+  - Introduction to gRPC
 - Data connector usage and streams
   - SQL/JDBC
 - Message broker technologies
