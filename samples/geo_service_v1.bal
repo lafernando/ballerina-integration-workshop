@@ -5,7 +5,7 @@ type Entry record {|
     float long;
     string src = "UNKNOWN";
     string address;
-    string? ref;
+    string ref?;
 |};
 
 map<Entry> entries = {};
