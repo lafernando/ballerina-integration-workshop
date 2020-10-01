@@ -51,6 +51,5 @@ function storeLocal(float lat, float long, string src, string address) returns @
     http:Client localSvcClient = new("http://localhost:8081");
     json payload = {lat, long, src, address, ref: system:uuid()};
     var x = check localSvcClient->post("/store", payload);
-    io:println("XXX: ", x.getTextPayload());
     io:println(string `Local lookup store: ${lat},${long}`);
 }
