@@ -1,10 +1,10 @@
 import ballerina/http;
-import ballerina/log as _;
+import ballerina/log;
 import ballerina/io;
 
 type Entry record {
     string src;
-    string ref;
+    string ref?;
 };
 
 http:Client backendSvcClient = new("http://localhost:8081");
