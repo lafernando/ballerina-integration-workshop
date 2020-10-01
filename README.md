@@ -23,8 +23,8 @@ Visual Studio Code is recommended as the editor for Ballerina projects. Install 
 
 ## Agenda
 - Ballerina services and clients
-  - Type system intro
-  - Taint analysis intro
+  - Type system basics
+  - Taint analysis
   - Writing an integration scenario for calling external services using the HTTP client and accepting JSON data
   - Working with JSON data
   - Service data binding, usage of open records
