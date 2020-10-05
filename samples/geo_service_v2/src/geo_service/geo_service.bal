@@ -23,10 +23,9 @@ service geoService on new http:Listener(8081) {
         methods: ["GET"]
     }
     resource function lookup(http:Caller caller, http:Request request, float lat, float long) returns @tainted error? {
-        stream<record{}, error> rs;
         transaction {
-            rs = dbClient->query(`SELECT address FROM GEO_ENTRY 
-                                  WHERE lat = ${<@untainted> lat} AND lng = ${<@untainted> long}`);
+            stream<record{}, error> rs = dbClient->query(`SELECT address FROM GEO_ENTRY 
+                                                          WHERE lat = ${<@untainted> lat} AND lng = ${<@untainted> long}`);
             record {|record {} value;|}? entry = check rs.next();
             string? address = ();
             if entry is record {|record {} value;|} {
