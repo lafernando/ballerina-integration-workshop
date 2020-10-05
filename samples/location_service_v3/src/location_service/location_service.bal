@@ -1,8 +1,11 @@
 import ballerina/http;
 import ballerina/system;
 import ballerina/io;
+import ballerinax/rabbitmq;
 
-GeoServiceBlockingClient geoClient = new("http://localhost:9090");
+GeoServiceBlockingClient grpcClient = new("http://localhost:9090");
+rabbitmq:Connection mqConn = new ({host: "localhost", port: 5672});
+rabbitmq:Channel mqChannel = new (mqConn);
 
 @http:ServiceConfig {
     basePath: "/"
@@ -29,7 +32,7 @@ service locationService on new http:Listener(8080) {
                            select check item.formatted_address;
             address = <string> addrs[0];
             if address is string {
-                check storeLocal(lat, long, "GoogleGeoCode", address);
+                check storeLocalMQ(lat, long, "GoogleGeoCode", address);
             }
         }
         check caller->respond(<@untainted> {location: {lat, long}, address});
@@ -38,7 +41,7 @@ service locationService on new http:Listener(8080) {
 }
 
 function lookupLocal(float lat, float long) returns @tainted string|error? {
-    var result = check geoClient->lookup({lat, long});
+    var result = check grpcClient->lookup({lat, long});
     string address = result[0].address;
     if address == "" {
         io:println(string `Local (grpc) lookup miss: ${lat},${long}`);
@@ -49,7 +52,13 @@ function lookupLocal(float lat, float long) returns @tainted string|error? {
     }
 }
 
-function storeLocal(float lat, float long, string src, string address) returns @tainted error? {
-    _ = check geoClient->store({lat, long, src, address});
+function storeLocalGRPC(float lat, float long, string src, string address) returns @tainted error? {
+    _ = check grpcClient->store({lat, long, src, address, ref: system:uuid()});
     io:println(string `Local (grpc) lookup store: ${lat},${long}`);
+}
+
+function storeLocalMQ(float lat, float long, string src, string address) returns @tainted error? {
+    json payload = {lat, long, src, address, ref: system:uuid()};
+    check mqChannel->basicPublish(payload, "geo_queue");
+    io:println(string `Local (mq) lookup store: ${lat},${long}`);
 }

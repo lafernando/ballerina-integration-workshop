@@ -34,7 +34,6 @@ Visual Studio Code is recommended as the editor for Ballerina projects. Install 
 - Data connector usage and streams
   - SQL/JDBC
 - Message broker technologies
-  - NATS
   - RabbitMQ
 - Scheduled tasks
 - Transactions
