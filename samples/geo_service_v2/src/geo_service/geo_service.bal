@@ -9,8 +9,6 @@ type Entry record {|
     string ref?;
 |};
 
-map<Entry> entries = {};
-
 jdbc:Client dbClient = check new ("jdbc:mysql://localhost:3306/GEO_DB?serverTimezone=UTC", "root", "root");
 
 @http:ServiceConfig {

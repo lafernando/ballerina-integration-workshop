@@ -12,4 +12,4 @@ target = "java8"
 
 [[platform.libraries]]
 path = "mysql-connector-java-8.0.18.jar"
-modules = ["geo_service"]
+modules = ["geo_service", "geo_service_grpc"]

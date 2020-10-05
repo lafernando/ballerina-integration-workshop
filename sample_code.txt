@@ -6,3 +6,6 @@ ballerina run geo_service_v1.bal
 curl http://localhost:8080/mylocation
 
 ballerina grpc --mode client --input geo_service.proto --output location_service_v3/src/location_service/
+ballerina grpc --mode service --input geo_service.proto --output geo_service_v2/src/geo_service_grpc/
+
+

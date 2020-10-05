@@ -41,15 +41,15 @@ function lookupLocal(float lat, float long) returns @tainted string|error? {
     var result = check geoClient->lookup({lat, long});
     string address = result[0].address;
     if address == "" {
-        io:println(string `Local lookup miss: ${lat},${long}`);
+        io:println(string `Local (grpc) lookup miss: ${lat},${long}`);
         return ();
     } else {
-        io:println(string `Local lookup hit: ${lat},${long}`);
+        io:println(string `Local (grpc) lookup hit: ${lat},${long}`);
         return address;
     }
 }
 
 function storeLocal(float lat, float long, string src, string address) returns @tainted error? {
     _ = check geoClient->store({lat, long, src, address});
-    io:println(string `Local lookup store: ${lat},${long}`);
+    io:println(string `Local (grpc) lookup store: ${lat},${long}`);
 }
