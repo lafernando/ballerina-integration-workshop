@@ -1,0 +1,5 @@
+$(cat geocoding_env)
+ballerina run location_service_v2.bal
+ballerina run geo_service_v1.bal
+curl http://localhost:8080/mylocation
+
