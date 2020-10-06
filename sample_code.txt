@@ -1,3 +1,27 @@
+Type system basics
+ - type_system_basics.bal
+Taint analysis
+ - taint_checking.bal
+Writing an integration scenario for calling external services using the HTTP client and accepting JSON data
+ - http_client_demo.bal
+   - http client - get
+   - function iteration
+   - http post
+Working with JSON data
+Service data binding, usage of open records
+Language integrated query for filtering data
+Error handling when communicating with external services
+Introduction to gRPC
+Data connector usage and streams
+SQL/JDBC
+Message broker technologies
+RabbitMQ
+Scheduled tasks
+Transactions
+Security framework basics
+BasicAuth, JWT
+
+
 $(cat geocoding_env)
 mysql -u root -p < db.sql
 
