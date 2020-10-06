@@ -1,0 +1,12 @@
+[project]
+org-name= "laf"
+version= "0.1.1"
+authors = ["lafernando"]
+repository = "https://github.com/lafernando/connectorx"
+keywords = ["connector","demo"]
+license = ["Apache-2.0"]
+
+[build-options]
+observability-included=true
+
+[dependencies]

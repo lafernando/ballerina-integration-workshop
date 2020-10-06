@@ -1,0 +1,1 @@
+{"laf/connectorx:0.1.1:Client" : [{"function":{"name":"echo","requiredParams":[{"msg":"string"}],"returnType":"string"}}]}
