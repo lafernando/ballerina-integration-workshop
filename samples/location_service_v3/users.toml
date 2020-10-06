@@ -1,0 +1,9 @@
+[b7a.users]
+
+  [b7a.users.jack]
+  password="pw1"
+  scopes="geocode"
+
+  [b7a.users.tom]
+  password="pw2"
+  scopes="general"

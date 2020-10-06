@@ -14,3 +14,9 @@ location_service_v3: ballerina run location_service
 geo_service_v2: ballerina run geo_service_grpc
 geo_service_v2: ballerina run geo_service_rabbitmq
 curl http://localhost:8080/mylocation
+
+Auth
+====
+
+location_service_v3: ballerina run location_service --b7a.config.file=users.toml --b7a.home=`ballerina home`
+curl -k -u jack:pw1 https://localhost:8080/mylocation

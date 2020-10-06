@@ -2,15 +2,33 @@ import ballerina/http;
 import ballerina/system;
 import ballerina/io;
 import ballerinax/rabbitmq;
+import ballerina/auth;
+import ballerina/config;
 
 GeoServiceBlockingClient grpcClient = new("http://localhost:9090");
 rabbitmq:Connection mqConn = new ({host: "localhost", port: 5672});
 rabbitmq:Channel mqChannel = new (mqConn);
 
+auth:InboundBasicAuthProvider basicAuthProvider = new;
+http:BasicAuthHandler basicAuthHandler = new (basicAuthProvider);
+
+listener http:Listener httpEp = new (8080, config = {
+    auth: {
+        authHandlers: [basicAuthHandler]
+    },
+    secureSocket: {
+        keyStore: {
+            path: config:getAsString("b7a.home") +
+                  "/bre/security/ballerinaKeystore.p12",
+            password: "ballerina"
+        }
+    }
+});
+
 @http:ServiceConfig {
     basePath: "/"
 }
-service locationService on new http:Listener(8080) {
+service locationService on httpEp {
 
     // https://developers.google.com/maps/documentation/geolocation/overview
     // https://developers.google.com/maps/documentation/geocoding/overview
